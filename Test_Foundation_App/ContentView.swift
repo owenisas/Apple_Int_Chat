@@ -32,7 +32,7 @@ struct ChatView: View {
             TextField("Enter your prompt here…", text: $promptText)
                 .textFieldStyle(.roundedBorder)
                 .padding(.horizontal)
-
+            
             Button(action: generateResponse) {
                 if isLoading {
                     ProgressView()
@@ -43,14 +43,18 @@ struct ChatView: View {
             }
             .buttonStyle(.borderedProminent)
             .disabled(promptText.isEmpty)
-
-            ScrollView {
-                Text(aiResponse)
-                    .padding()
+            
+            if !aiResponse.isEmpty {
+                
+                ScrollView {
+                    Text(aiResponse)
+                        .padding()
+                }
+                .frame(maxHeight: 300)
+                .background(Color(UIColor.secondarySystemBackground))
+                .cornerRadius(8)
+                .padding(.horizontal)
             }
-            .background(Color(UIColor.secondarySystemBackground))
-            .cornerRadius(8)
-            .padding(.horizontal)
         }
         .padding(.top)
     }
